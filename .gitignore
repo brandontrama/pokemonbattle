@@ -1,3 +1,5 @@
-# ignore fonts
+# Ignore the "fonts" folder
 fonts/
-*.ttf
+
+# Ignore the "sprites" folder
+sprites/

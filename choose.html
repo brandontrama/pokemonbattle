@@ -9,22 +9,32 @@
 </head>
 <body>
     <main>
-        <h1>Choose your Pokemon!</h1>
-        <section class="starters">
-            <select>
-                <option value="gen1">Gen I</option>
-                <option value="gen2">Gen II</option>
-            </select>
-            <div>
-                <img id="bulbasaur" src="sprites/Gen I/front_sprites/reg/bulbasaur_frontsprite.png">
-            </div>
-            <div>
-                <img id="charmander" src="sprites/Gen I/front_sprites/reg/charmander_frontsprite.png">
-            </div>
-            <div>
-                <img id="squirtle" src="sprites/Gen I/front_sprites/reg/squirtle_frontsprite.png">
-            </div>
+        <section class="video-background">
+            <!-- Video Credit: @ostbox on YouTube -->
+            <video autoplay muted loop id="scrollingtrees">
+                <source src="scrollingtrees.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </section>
+
+          <section class="starter-box">
+            <h1 id="starter-header">Choose your Pokemon!</h1>
+            <section class="starters">
+                <select>
+                    <option value="gen1">Gen I</option>
+                    <option value="gen2">Gen II</option>
+                </select>
+                <div>
+                    <img id="bulbasaur" src="sprites/Gen I/front_sprites/reg/bulbasaur_frontsprite.png">
+                </div>
+                <div>
+                    <img id="charmander" src="sprites/Gen I/front_sprites/reg/charmander_frontsprite.png">
+                </div>
+                <div>
+                    <img id="squirtle" src="sprites/Gen I/front_sprites/reg/squirtle_frontsprite.png">
+                </div>
+            </section>
+          </section>
         <script src="script.js"></script>
     </main>
 </body>

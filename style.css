@@ -1,9 +1,18 @@
 
-@font-face { font-family: pixel; src: url('EarlyGameBoy.ttf'); } 
+@font-face { font-family: pixel; src: url('fonts/EarlyGameBoy.ttf'); } 
 
-body { font-family: pixel; }
+body { font-family: pixel, Arial, sans-serif; }
 
 h1 { 
     display: flex;
     justify-content: center;
+}
+
+.starters {
+    display: flex;
+    justify-content: center;
+}
+.starters img {
+    width: 160px;
+    height: 160px;
 }

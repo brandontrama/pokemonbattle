@@ -3,3 +3,6 @@ fonts/
 
 # Ignore the "sprites" folder
 sprites/
+
+# Ignore .mp4 files
+*.mp4

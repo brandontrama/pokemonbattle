@@ -4,5 +4,7 @@ fonts/
 # Ignore the "sprites" folder
 sprites/
 
-# Ignore .mp4 files
+# Ignore .mp4, .ttf, .png files
 *.mp4
+*.ttf
+*.png

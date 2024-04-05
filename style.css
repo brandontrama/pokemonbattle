@@ -3,9 +3,22 @@
 
 body { font-family: pixel, Arial, sans-serif; }
 
-h1 { 
+#scrollingtrees {
+    height: 100vh;
+    position: fixed;
+    z-index: -1;
+}
+
+.starter-box {
+    display: flex;
+    flex-direction: column;
+    padding-top: 100px;
+}
+
+#starter-header {
     display: flex;
     justify-content: center;
+    padding-bottom: 50px;
 }
 
 .starters {

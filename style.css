@@ -1,0 +1,9 @@
+
+@font-face { font-family: pixel; src: url('EarlyGameBoy.ttf'); } 
+
+body { font-family: pixel; }
+
+h1 { 
+    display: flex;
+    justify-content: center;
+}

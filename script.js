@@ -8,9 +8,9 @@ pokemonImages.forEach(img => {
 var bulbasaurCry = new Audio(`audios/bulbasaur-cry.mp3`);
 var charmanderCry = new Audio(`audios/charmander-cry.mp3`);
 var squirtleCry = new Audio(`audios/squirtle-cry.mp3`);
-bulbasaurCry.volume = 0.25;
-charmanderCry.volume = 0.25;
-squirtleCry.volume = 0.25;
+bulbasaurCry.volume = 0.1;
+charmanderCry.volume = 0.1;
+squirtleCry.volume = 0.1;
 
 function handleMouseOver(event) {
     //event.target.classList.add('big');
@@ -53,7 +53,7 @@ function selectPokemon(event) {
 function confirmSelection(confirm) {
     if (confirm) {
         console.log("Selected Pokemon:", selectedPokemon);
-        
+        window.location.href = 'battle.html';
     } else {
         document.getElementById('confirmation-box').style.display = 'none';
         const pokemonImage = document.getElementById(selectedPokemon);
@@ -61,4 +61,19 @@ function confirmSelection(confirm) {
         pokemonImage.classList.remove('big');
     }
     selectedPokemon = null;
+}
+
+let computer = null;
+
+function chooseOpponent(player) {
+    switch (player) {
+        case 'bulbasaur':
+            computer = 'charmander';
+            break;
+        case 'charmander':
+            computer = 'squirtle';
+            break;
+        case 'squirtle':
+            computer = 'bulbasaur';
+    }
 }

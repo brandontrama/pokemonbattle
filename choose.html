@@ -6,18 +6,20 @@
     <title>Choose your Pokemon!</title>
 
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Pokemon Gameboy Stylesheet made by: @luttje on GitHub (https://github.com/luttje/css-pokemon-gameboy?tab=readme-ov-file) -->
+    <link rel="stylesheet" href="./styles/css-pokemon-gameboy.css">
 </head>
 <body>
     <main>
         <section class="video-background">
             <!-- Video Credit: @ostbox on YouTube -->
             <video autoplay muted loop id="scrollingtrees">
-                <source src="scrollingtrees.mp4" type="video/mp4">
+                <source src="videos/scrollingtrees.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </section>
-
-          <section class="starter-box">
+        <section class="starter-box">
             <h1 id="starter-header">Choose your Pokemon!</h1>
             <section class="starters">
                 <select>
@@ -25,16 +27,31 @@
                     <option value="gen2">Gen II</option>
                 </select>
                 <div>
-                    <img id="bulbasaur" src="sprites/Gen I/front_sprites/reg/bulbasaur_frontsprite.png">
+                    <button id="bulbasaur-button" class="pokemon-buttons" type="button">
+                        <img id="bulbasaur" class="pokemon" src="sprites/Gen I/front_sprites/reg/bulbasaur_frontsprite.png">
+                    </button>
                 </div>
                 <div>
-                    <img id="charmander" src="sprites/Gen I/front_sprites/reg/charmander_frontsprite.png">
+                    <button id="charmander-button" class="pokemon-buttons" type="button">
+                        <img id="charmander" class="pokemon" src="sprites/Gen I/front_sprites/reg/charmander_frontsprite.png">
+                    </button>
                 </div>
                 <div>
-                    <img id="squirtle" src="sprites/Gen I/front_sprites/reg/squirtle_frontsprite.png">
+                    <button id="squirtle-button" class="pokemon-buttons" type="button">
+                        <img id="squirtle" class="pokemon" src="sprites/Gen I/front_sprites/reg/squirtle_frontsprite.png">
+                    </button>
                 </div>
             </section>
           </section>
+          <section>
+            <div id ="confirmation-box" style="display: none;">
+                <h3>Is this the Pokemon you'd like to choose?</h3>
+                <ul class="framed buttons">
+                    <li><button onclick="confirmSelection(true)">Yes, continue</button></li>
+                    <li><button onclick="confirmSelection(false)">No, I'd like to choose another</button></li>
+                </ul>
+            </div>
+        </section>
         <script src="script.js"></script>
     </main>
 </body>

@@ -8,6 +8,15 @@ body {
     height: 100vh;
 }
 
+.battle-background img {
+    position: absolute;
+    height: 545px;
+    width: 815px;
+    top: 119px;
+    left: 241px;
+    z-index: -999;
+}
+
 .player-box {
     padding-left: 10px;
     position: fixed;
@@ -19,8 +28,7 @@ body {
     position: relative;
 }
 
-#players-pokemon, #players-battlebase, 
-#opponents-pokemon, #opponents-battlebase {
+#players-pokemon, #opponents-pokemon {
     position: absolute;
 }
 
@@ -32,13 +40,6 @@ body {
     z-index: -998;
 }
 
-#players-battlebase {
-    height: 140px;
-    bottom: 118px;
-    left: 111px;
-    z-index: -999;
-}
-
 .opponent-box {
     padding-right: 10px;
     position: fixed;
@@ -47,9 +48,9 @@ body {
 }
 
 #opponents-pokemon {
-
-}
-
-#opponents-battlebase {
-
+    height: 320px;
+    width: 320px;
+    top: 220px;
+    right: 270px;
+    z-index: -998;
 }

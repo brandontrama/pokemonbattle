@@ -5,19 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Battle!</title>
 
-    <link rel="stylesheet" href="battlestyle.css">
+    <link rel="stylesheet" href="battle-style.css">
 </head>
 <body>
     <main>
-        <section class="background-box">
-            <img id="background" src="">
-        </section>
         <section class="player-box">
-
+            <div>
+                <img id="players-pokemon" src="sprites/Gen I/back_sprites/bulbasaur_backsprite.png" alt="player's pokemon">
+                <img id="players-battlebase" src="battlebases/player-battlebase.png" alt="battlebase">
+            </div>
         </section>
-        <section class="computer-box">
-
+        <section class="opponent-box">
+            <div>
+                <img id="opponents-pokemon" src="sprites/Gen I/back_sprites/charmander_backsprite.png" alt="player's pokemon">
+                <img id="opponents-battlebase" src="battlebases/opponent-battlebase.png" alt="battlebase">
+            </div>
         </section>
+
+        <script src="battle-script.js"></script>
     </main>
 </body>
 </html>

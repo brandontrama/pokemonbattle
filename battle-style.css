@@ -1,0 +1,55 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('gbaoverlay.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+.player-box {
+    padding-left: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0
+}
+
+.player-box div {
+    position: relative;
+}
+
+#players-pokemon, #players-battlebase, 
+#opponents-pokemon, #opponents-battlebase {
+    position: absolute;
+}
+
+#players-pokemon {
+    height: 320px;
+    width: 320px;
+    bottom: 37px;
+    left: 250px;
+    z-index: -998;
+}
+
+#players-battlebase {
+    height: 140px;
+    bottom: 118px;
+    left: 111px;
+    z-index: -999;
+}
+
+.opponent-box {
+    padding-right: 10px;
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+
+#opponents-pokemon {
+
+}
+
+#opponents-battlebase {
+
+}

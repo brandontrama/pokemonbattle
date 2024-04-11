@@ -63,17 +63,17 @@ function confirmSelection(confirm) {
     selectedPokemon = null;
 }
 
-let computer = null;
+let opponent = null;
 
 function chooseOpponent(player) {
     switch (player) {
         case 'bulbasaur':
-            computer = 'charmander';
+            opponent = 'charmander';
             break;
         case 'charmander':
-            computer = 'squirtle';
+            opponent = 'squirtle';
             break;
         case 'squirtle':
-            computer = 'bulbasaur';
+            opponent = 'bulbasaur';
     }
 }

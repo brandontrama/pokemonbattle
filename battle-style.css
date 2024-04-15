@@ -1,56 +1,74 @@
-body {
+/*body {
     margin: 0;
     padding: 0;
-    background-image: url('backgrounds/gbaoverlay.jpg');
+    background-image: url('backgrounds/gbaoverlay_with_battlebackground.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     height: 100vh;
-}
+    z-index: -999;
+}*/
 
-.battle-background img {
+/*.battle-background img {
     position: absolute;
     height: 545px;
     width: 815px;
     top: 119px;
     left: 241px;
     z-index: -999;
-}
-
-.player-box {
-    padding-left: 10px;
-    position: fixed;
-    bottom: 0;
-    left: 0
-}
-
-.player-box div {
-    position: relative;
-}
+}*/
 
 #players-pokemon, #opponents-pokemon {
     position: absolute;
 }
 
+.player-box {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+    justify-content: space-around;
+    height: 500px;
+    width: 500px;
+    padding-bottom: 9.5vh;
+}
+
+#health {
+    width: 400px;
+}
+
+#pokemon {
+    height: 400px;
+    width: 400px;
+}
+
+#battle-options {
+    background-color: white;
+    height: 200px;
+    width: 575px;
+    left: 40vw;
+    bottom: 55vh;
+}
+
 #players-pokemon {
-    height: 320px;
-    width: 320px;
-    bottom: 37px;
-    left: 250px;
+    height: 400px;
+    width: auto;
     z-index: -998;
 }
 
 .opponent-box {
-    padding-right: 10px;
-    position: fixed;
-    top: 0;
-    right: 0;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding-top: 5vh;
+    padding-right: 5vh;
 }
 
 #opponents-pokemon {
-    height: 320px;
-    width: 320px;
-    top: 220px;
-    right: 270px;
+    height: 400px;
+    width: auto;
     z-index: -998;
 }

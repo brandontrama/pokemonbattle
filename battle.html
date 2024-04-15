@@ -5,23 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Battle!</title>
 
+    <!-- Pokemon Gameboy Stylesheet made by: @luttje on GitHub (https://github.com/luttje/css-pokemon-gameboy?tab=readme-ov-file) -->
+    <link rel="stylesheet" href="./styles/css-pokemon-gameboy.css">
+
     <link rel="stylesheet" href="battle-style.css">
 </head>
 <body>
     <main>
-        <section class="battle-background">
-            <img src="backgrounds/battle-background.png" alt="battle background">
-        </section>
-        <section class="player-box">
-            <div>
-                <img id="players-pokemon" src="sprites/Gen I/back_sprites/bulbasaur_backsprite.png" alt="player's pokemon">
-            </div>
-        </section>
         <section class="opponent-box">
-            <div>
+            <div id="health">
+                <div class="progress-bar-container">
+                    <label for="progressBarG">Charmander:</label>
+                    <div class="progress-bar p100" id="progressBarG"></div>
+                </div>
+            <div id="pokemon">
                 <img id="opponents-pokemon" src="sprites/Gen I/front_sprites/reg/charmander_frontsprite.png" alt="player's pokemon">
             </div>
         </section>
+        <section class="player-box">
+            <div id="health">
+                <div class="progress-bar-container">
+                    <label for="progressBarG">Bulbasaur:</label>
+                    <div class="progress-bar p100" id="progressBarG"></div>
+                </div>
+            </div>
+            <div id="pokemon">
+                <img id="players-pokemon" src="sprites/Gen I/back_sprites/bulbasaur_backsprite.png" alt="player's pokemon">
+            </div>
+        </section>
+        <div id="battle-options" class="framed buttons compact">
+            <h3>What would you like to do?</h3>
+            <ul class="framed buttons compact">
+                <li><button>Fight</button></li>
+                <li><button class="pokemon">PKMN</button></li>
+                <li><button>Item</button></li>
+                <li><button>Run</button></li>
+            </ul>
+        </div>
 
         <script src="battle-script.js"></script>
     </main>

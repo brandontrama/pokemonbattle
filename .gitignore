@@ -1,5 +1,5 @@
 # ignores whatever this is
-*.DS_Store
+.DS_Store
 
 # incase I implement expressJS
 /node_modules

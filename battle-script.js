@@ -1,4 +1,8 @@
 
+var music = new Audio('audios/music/pokemon_red_wildbattlemusic.mp3');
+music.volume = 0.5;
+music.play();
+
 var searchParams = new URLSearchParams(window.location.search);
 var player = searchParams.get('pokemon').toUpperCase();
 

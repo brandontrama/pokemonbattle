@@ -33,7 +33,7 @@ function selectPokemon(event) {
     selectedPokemon = pokemonId;
     document.getElementById('confirmation-box').style.display = 'block';
     const pokemonImage = document.getElementById(selectedPokemon);
-    pokemonImage.src = `sprites/Gen I/front_sprites/anim/${selectedPokemon}_frontsprite[ANIM].png`;
+    pokemonImage.src = `sprites/GenI/front_sprites/anim/${selectedPokemon}_frontsprite[ANIM].png`;
     pokemonImage.classList.add('big');
     switch (selectedPokemon) {
         case 'bulbasaur':
@@ -57,7 +57,7 @@ function confirmSelection(confirm) {
     } else {    
         document.getElementById('confirmation-box').style.display = 'none';
         const pokemonImage = document.getElementById(selectedPokemon);
-        pokemonImage.src = `sprites/Gen I/front_sprites/reg/${selectedPokemon}_frontsprite.png`;
+        pokemonImage.src = `sprites/GenI/front_sprites/reg/${selectedPokemon}_frontsprite.png`;
         pokemonImage.classList.remove('big');
     }
     selectedPokemon = null;

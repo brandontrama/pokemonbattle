@@ -5,9 +5,9 @@ pokemonImages.forEach(img => {
     img.addEventListener("mouseleave", handleMouseLeave);
 });
 
-var bulbasaurCry = new Audio(`audios/bulbasaur-cry.mp3`);
-var charmanderCry = new Audio(`audios/charmander-cry.mp3`);
-var squirtleCry = new Audio(`audios/squirtle-cry.mp3`);
+var bulbasaurCry = new Audio(`audios/cries/bulbasaur-cry.mp3`);
+var charmanderCry = new Audio(`audios/cries/charmander-cry.mp3`);
+var squirtleCry = new Audio(`audios/cries/squirtle-cry.mp3`);
 bulbasaurCry.volume = 0.1;
 charmanderCry.volume = 0.1;
 squirtleCry.volume = 0.1;

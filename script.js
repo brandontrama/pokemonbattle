@@ -53,27 +53,12 @@ function selectPokemon(event) {
 function confirmSelection(confirm) {
     if (confirm) {
         console.log("Selected Pokemon:", selectedPokemon);
-        window.location.href = 'battle.html';
-    } else {
+        window.location.href = 'battle.html?pokemon=' + encodeURIComponent(selectedPokemon);
+    } else {    
         document.getElementById('confirmation-box').style.display = 'none';
         const pokemonImage = document.getElementById(selectedPokemon);
         pokemonImage.src = `sprites/Gen I/front_sprites/reg/${selectedPokemon}_frontsprite.png`;
         pokemonImage.classList.remove('big');
     }
     selectedPokemon = null;
-}
-
-let opponent = null;
-
-function chooseOpponent(player) {
-    switch (player) {
-        case 'bulbasaur':
-            opponent = 'charmander';
-            break;
-        case 'charmander':
-            opponent = 'squirtle';
-            break;
-        case 'squirtle':
-            opponent = 'bulbasaur';
-    }
 }

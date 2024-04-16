@@ -1,15 +1,19 @@
 
+// plays the background wild battle music
 var music = new Audio('audios/music/pokemon_red_wildbattlemusic.mp3');
 music.volume = 0.5;
 music.play();
 
+// grabs the query param that specifies the player's pokemon
 var searchParams = new URLSearchParams(window.location.search);
 var player = searchParams.get('pokemon').toUpperCase();
 
 let opponent;
 
+// assigns the opponent according to the player
 chooseOpponent(player);
 
+// displays both player and opponent's pokemon
 const playerPokemon = document.getElementById('players-pokemon');
 playerPokemon.setAttribute('src', `sprites/Gen I/back_sprites/${player}_backsprite.png`);
 const opponentPokemon = document.getElementById('opponents-pokemon');
@@ -39,7 +43,7 @@ const battleOptions = document.getElementById('battle-options');
 returnToMenu();
 
 var bulbasaurMoves = [
-    ["TACKLE", 40],
+    ["TACKLE", 40], // each move has a name and dmg value [name, dmg]
     ["VINE WHIP", 45]
 ];
 var squirtleMoves = [
@@ -53,6 +57,7 @@ var charmanderMoves = [
 
 var moves = [bulbasaurMoves, squirtleMoves, charmanderMoves];
 
+// replaces battle menu with fight menu
 function fight() {
     let moveList = document.createElement('ul');
     moveList.className = 'framed buttons compact';
@@ -110,6 +115,7 @@ let playerHealth, opponentHealth = 100;
 const playerHealthBar = document.getElementById('player-health');
 const opponentHealthBar = document.getElementById('opponent-health');
 
+// attacks a pokemon with the specified move depending on target
 function attack(move, target) {
     switch (target) {
         case 'opponent':
@@ -125,6 +131,7 @@ function attack(move, target) {
     }
 }
 
+// heals a pokemon depending on the target
 function heal(target) {
     switch (target) {
         case 'opponent':
@@ -140,6 +147,7 @@ function heal(target) {
     }
 }
 
+// shows the list of items available to use (in this case only a base potion)
 function showItems() {
     let ul = document.createElement('ul');
     ul.className = 'framed buttons compact';
@@ -155,6 +163,7 @@ function showItems() {
     battleOptions.replaceChildren(ul);
 }
 
+// reverts the menu back to the default 4 options [fight, pkmn (not implemented), item, run]
 function returnToMenu() {
     let battlePrompt = document.createElement('h3');
     battlePrompt.appendChild(document.createTextNode('What would you like to do?'));

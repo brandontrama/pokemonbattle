@@ -17,7 +17,7 @@ chooseOpponent(player);
 const playerPokemon = document.getElementById('players-pokemon');
 playerPokemon.setAttribute('src', `sprites/GenI/back_sprites/${player}_backsprite.png`);
 const opponentPokemon = document.getElementById('opponents-pokemon');
-opponentPokemon.setAttribute('src', `sprites/GenI/front_sprites/reg/${opponent}_frontsprite.png`);
+opponentPokemon.setAttribute('src', `sprites/GenI/front_sprites/anim/${opponent}_frontsprite[ANIM].png`);
 
 const playerHealthLabel = document.getElementById('player-health-label');
 playerHealthLabel.appendChild(document.createTextNode(`${player}` + `:`));
@@ -129,6 +129,7 @@ function attack(move, target) {
             opponentHealth -= move[1];
             console.log("Opponent health: " + opponentHealth);
             opponentHealthBar.className = `progress-bar p${opponentHealth}`;
+            playerAtkAnim();
             break;
         case 'player':
             playerHealth -= move[1];
@@ -150,7 +151,7 @@ function attack(move, target) {
         // victoryMsg.appendChild(document.createTextNode("Opponent's pokemon fainted. You won!"));
         // battleOptions.replaceChildren(victoryMsg);
         timer();
-        alert()
+        alert("Opponent's pokemon fainted. You won!")
         window.location.href = "index.html";
     }
 }
@@ -250,6 +251,18 @@ function returnToMenu() {
     battleOptions.replaceChildren(battlePrompt, options);
 }
 
-    function timer() {
+function timer() {
     setTimeout(() => {console.log("Wait 3 seconds...");}, 3000);
-    }
+}
+
+function playerAtkAnim() {
+    playerPokemon.classList.remove('moveBackward');
+    playerPokemon.classList.add('moveForward');
+    opponentPokemon.classList.add('hit');
+    setTimeout(() => {
+        console.log("Attacking...");
+        playerPokemon.classList.remove('moveForward');
+        playerPokemon.classList.add('moveBackward');
+        opponentPokemon.classList.add('unhit');
+    }, 250);
+}

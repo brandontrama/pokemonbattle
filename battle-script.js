@@ -15,9 +15,9 @@ chooseOpponent(player);
 
 // displays both player and opponent's pokemon
 const playerPokemon = document.getElementById('players-pokemon');
-playerPokemon.setAttribute('src', `sprites/Gen I/back_sprites/${player}_backsprite.png`);
+playerPokemon.setAttribute('src', `sprites/GenI/back_sprites/${player}_backsprite.png`);
 const opponentPokemon = document.getElementById('opponents-pokemon');
-opponentPokemon.setAttribute('src', `sprites/Gen I/front_sprites/reg/${opponent}_frontsprite.png`);
+opponentPokemon.setAttribute('src', `sprites/GenI/front_sprites/reg/${opponent}_frontsprite.png`);
 
 const playerHealthLabel = document.getElementById('player-health-label');
 playerHealthLabel.appendChild(document.createTextNode(`${player}` + `:`));
@@ -55,7 +55,7 @@ var charmanderMoves = [
     ["EMBER", 30, 5]
 ];
 
-var moves = [bulbasaurMoves, squirtleMoves, charmanderMoves];
+var moves = [bulbasaurMoves, charmanderMoves, squirtleMoves];
 
 // replaces battle menu with fight menu
 function fight() {
@@ -79,23 +79,6 @@ function fight() {
                 moveList.appendChild(li);
             });
             break;
-        case 'SQUIRTLE':
-            squirtleMoves.forEach(move => {
-                console.log(move[0]);
-                let li = document.createElement('li');
-                let moveButton = document.createElement('button');
-                moveButton.setAttribute('id', move[0]);
-                moveButton.appendChild(document.createTextNode(move[0]));
-                moveButton.addEventListener("click", () => {
-                    attack(move, 'opponent');
-                    const rand = Math.floor(Math.random() * 2);
-                    attack(bulbasaurMoves[rand], 'player');
-                    returnToMenu();
-                });
-                li.appendChild(moveButton);
-                moveList.appendChild(li);
-            });
-            break;
         case 'CHARMANDER':
             charmanderMoves.forEach(move => {
                 console.log(move[0]);
@@ -107,6 +90,23 @@ function fight() {
                     attack(move, 'opponent');
                     const rand = Math.floor(Math.random() * 2);
                     attack(squirtleMoves[rand], 'player');
+                    returnToMenu();
+                });
+                li.appendChild(moveButton);
+                moveList.appendChild(li);
+            });
+                break;
+        case 'SQUIRTLE':
+            squirtleMoves.forEach(move => {
+                console.log(move[0]);
+                let li = document.createElement('li');
+                let moveButton = document.createElement('button');
+                moveButton.setAttribute('id', move[0]);
+                moveButton.appendChild(document.createTextNode(move[0]));
+                moveButton.addEventListener("click", () => {
+                    attack(move, 'opponent');
+                    const rand = Math.floor(Math.random() * 2);
+                    attack(bulbasaurMoves[rand], 'player');
                     returnToMenu();
                 });
                 li.appendChild(moveButton);

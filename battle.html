@@ -12,27 +12,28 @@
 </head>
 <body>
     <main>
-        <section class="opponent-box">
-            <div id="health">
+        <div class="opponent-box">
+            <div class="health">
                 <div class="progress-bar-container">
-                    <label for="progressBarG" id="opponent-health-label"></label>
+                    <label id="opponent-health-label"></label>
                     <div class="progress-bar p100" id="opponent-health"></div>
                 </div>
-            <div id="pokemon">
-                <img id="opponents-pokemon" src="" alt="opponent's pokemon">
             </div>
-        </section>
-        <section class="player-box">
-            <div id="health">
+            <div class="pokemon">
+                <img id="opponents-pokemon" src="misc/placeholder.png" alt="opponent's pokemon">
+            </div>
+        </div>
+        <div class="player-box">
+            <div class="health">
                 <div class="progress-bar-container">
-                    <label for="progressBarG" id="player-health-label"></label>
+                    <label id="player-health-label"></label>
                     <div class="progress-bar p100" id="player-health"></div>
                 </div>
             </div>
-            <div id="pokemon">
-                <img id="players-pokemon" src="" alt="player's pokemon">
+            <div class="pokemon">
+                <img id="players-pokemon" src="misc/placeholder.png" alt="player's pokemon">
             </div>
-        </section>
+        </div>
         <div id="battle-options" class="framed buttons compact"></div>
 
         <script src="battle-script.js"></script>

@@ -34,11 +34,11 @@
     padding-bottom: 9.5vh;
 }
 
-#health {
+.health {
     width: 400px;
 }
 
-#pokemon {
+.pokemon {
     height: 400px;
     width: 400px;
 }

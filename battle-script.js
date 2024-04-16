@@ -125,6 +125,36 @@ function attack(move, target) {
     }
 }
 
+function heal(target) {
+    switch (target) {
+        case 'opponent':
+            opponentHealth += 20;
+            console.log("Opponent health: " + opponentHealth);
+            opponentHealthBar.className = `progress-bar p${opponentHealth}`;
+            break;
+        case 'player':
+            playerHealth += 20;
+            console.log("Player health: " + playerHealth)
+            playerHealthBar.className = `progress-bar p${playerHealth}`;
+            break;
+    }
+}
+
+function showItems() {
+    let ul = document.createElement('ul');
+    ul.className = 'framed buttons compact';
+    let li = document.createElement('li');
+    let potionBtn = document.createElement('button');
+    potionBtn.appendChild(document.createTextNode("Potion"));
+    potionBtn.addEventListener("click", () => {
+        heal('player');
+        returnToMenu();
+    });
+    li.appendChild(potionBtn);
+    ul.appendChild(li);
+    battleOptions.replaceChildren(ul);
+}
+
 function returnToMenu() {
     let battlePrompt = document.createElement('h3');
     battlePrompt.appendChild(document.createTextNode('What would you like to do?'));
@@ -147,6 +177,7 @@ function returnToMenu() {
     let item = document.createElement('li');
     let itemBtn = document.createElement('button');
     itemBtn.appendChild(document.createTextNode('Item'));
+    itemBtn.addEventListener("click", showItems);
     item.appendChild(itemBtn);
 
     let run = document.createElement('li');

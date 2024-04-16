@@ -43,16 +43,16 @@ const battleOptions = document.getElementById('battle-options');
 returnToMenu();
 
 var bulbasaurMoves = [
-    ["TACKLE", 40], // each move has a name and dmg value [name, dmg]
-    ["VINE WHIP", 45]
+    ["TACKLE", 20, 20], // each move has a name, dmg, and pp (uses) value [name, dmg, pp]
+    ["VINE WHIP", 35, 5]
 ];
 var squirtleMoves = [
-    ["TACKLE", 40],
-    ["WATER GUN", 40]
+    ["TACKLE", 25, 20],
+    ["WATER GUN", 30, 5]
 ];
 var charmanderMoves = [
-    ["TACKLE", 40],
-    ["EMBER", 40]
+    ["TACKLE", 20, 20],
+    ["EMBER", 30, 5]
 ];
 
 var moves = [bulbasaurMoves, squirtleMoves, charmanderMoves];
@@ -71,6 +71,8 @@ function fight() {
                 moveButton.appendChild(document.createTextNode(move[0]));
                 moveButton.addEventListener("click", () => {
                     attack(move, 'opponent');
+                    const rand = Math.floor(Math.random() * 2);
+                    attack(charmanderMoves[rand], 'player');
                     returnToMenu();
                 });
                 li.appendChild(moveButton);
@@ -86,6 +88,8 @@ function fight() {
                 moveButton.appendChild(document.createTextNode(move[0]));
                 moveButton.addEventListener("click", () => {
                     attack(move, 'opponent');
+                    const rand = Math.floor(Math.random() * 2);
+                    attack(bulbasaurMoves[rand], 'player');
                     returnToMenu();
                 });
                 li.appendChild(moveButton);
@@ -101,6 +105,8 @@ function fight() {
                 moveButton.appendChild(document.createTextNode(move[0]));
                 moveButton.addEventListener("click", () => {
                     attack(move, 'opponent');
+                    const rand = Math.floor(Math.random() * 2);
+                    attack(squirtleMoves[rand], 'player');
                     returnToMenu();
                 });
                 li.appendChild(moveButton);
@@ -111,7 +117,8 @@ function fight() {
     battleOptions.replaceChildren(moveList);
 }
 
-let playerHealth, opponentHealth = 100;
+let playerHealth = 100;
+let opponentHealth = 100;
 const playerHealthBar = document.getElementById('player-health');
 const opponentHealthBar = document.getElementById('opponent-health');
 
@@ -129,17 +136,55 @@ function attack(move, target) {
             playerHealthBar.className = `progress-bar p${playerHealth}`;
             break;
     }
+    if (playerHealth <= 0) {
+        console.log('You fainted!');
+        // let defeatMsg = document.createElement('h3');
+        // defeatMsg.appendChild(document.createTextNode('You fainted!'));
+        // battleOptions.replaceChildren(defeatMsg);
+        alert('You fainted!');
+        timer();
+        window.location.href = "index.html";
+    } else if (opponentHealth <= 0) {
+        console.log("Opponent's pokemon fainted. You won!");
+        // let victoryMsg = document.createElement('h3');
+        // victoryMsg.appendChild(document.createTextNode("Opponent's pokemon fainted. You won!"));
+        // battleOptions.replaceChildren(victoryMsg);
+        timer();
+        alert()
+        window.location.href = "index.html";
+    }
 }
 
 // heals a pokemon depending on the target
 function heal(target) {
     switch (target) {
         case 'opponent':
+            if (opponentHealth === 100) {
+                let didntWork = document.createElement('h3'); // creates a new header element
+                didntWork.appendChild(document.createTextNode("It didn't work...")); // adds a new text node into the header
+                console.log(didntWork.textContent);
+                battleOptions.replaceChildren(didntWork); // replaces all children in battleOptions with the new header created above
+                break;
+            } else if (opponentHealth > 80) {
+                opponentHealth = 100;
+                console.log("Opponent health: " + opponentHealth);
+                opponentHealthBar.className = `progress-bar p${opponentHealth}`;
+                break;
+            } else
             opponentHealth += 20;
             console.log("Opponent health: " + opponentHealth);
             opponentHealthBar.className = `progress-bar p${opponentHealth}`;
             break;
         case 'player':
+            if (playerHealth === 100) {
+                let battlePrompt = document.createElement('h3');
+                battlePrompt.appendChild(document.createTextNode('It didn\'t work...'));
+                battleOptions.replaceChildren(battlePrompt);
+            } else if (playerHealth > 80) {
+                playerHealth += 100 - (playerHealth - 20);
+                console.log("Opponent health: " + playerHealth);
+                playerHealthBar.className = `progress-bar p${playerHealthBar}`;
+            } else
             playerHealth += 20;
             console.log("Player health: " + playerHealth)
             playerHealthBar.className = `progress-bar p${playerHealth}`;
@@ -156,6 +201,7 @@ function showItems() {
     potionBtn.appendChild(document.createTextNode("Potion"));
     potionBtn.addEventListener("click", () => {
         heal('player');
+        timer();
         returnToMenu();
     });
     li.appendChild(potionBtn);
@@ -203,3 +249,7 @@ function returnToMenu() {
     options.appendChild(run);
     battleOptions.replaceChildren(battlePrompt, options);
 }
+
+    function timer() {
+    setTimeout(() => {console.log("Wait 3 seconds...");}, 3000);
+    }

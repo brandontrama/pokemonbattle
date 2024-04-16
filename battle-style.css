@@ -72,3 +72,19 @@
     width: auto;
     z-index: -998;
 }
+
+.moveForward {
+    transform: translate(50px, -100px);
+}
+
+.moveBackward {
+    transform: translate(0);
+}
+
+.hit {
+    color: white;
+}
+
+.unhit {
+    color: none;
+}

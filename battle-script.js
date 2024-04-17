@@ -42,8 +42,9 @@ function chooseOpponent(player) {
 const battleOptions = document.getElementById('battle-options');
 returnToMenu();
 
+// each move has a name, dmg, and pp (uses) value [name, dmg, pp]
 var bulbasaurMoves = [
-    ["TACKLE", 20, 20], // each move has a name, dmg, and pp (uses) value [name, dmg, pp]
+    ["TACKLE", 20, 20],
     ["VINE WHIP", 35, 5]
 ];
 var squirtleMoves = [

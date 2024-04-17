@@ -71,7 +71,8 @@ function fight() {
                 moveButton.appendChild(document.createTextNode(move[0]));
                 moveButton.addEventListener("click", () => {
                     attack(move, 'opponent');
-                    const rand = Math.floor(Math.random() * 2);
+                    // opponent gets their turn after player attacks
+                    let rand = Math.floor(Math.random() * 2);
                     attack(charmanderMoves[rand], 'player');
                     returnToMenu();
                 });
@@ -88,7 +89,8 @@ function fight() {
                 moveButton.appendChild(document.createTextNode(move[0]));
                 moveButton.addEventListener("click", () => {
                     attack(move, 'opponent');
-                    const rand = Math.floor(Math.random() * 2);
+                    // opponent gets their turn after player attacks
+                    let rand = Math.floor(Math.random() * 2);
                     attack(squirtleMoves[rand], 'player');
                     returnToMenu();
                 });
@@ -105,7 +107,8 @@ function fight() {
                 moveButton.appendChild(document.createTextNode(move[0]));
                 moveButton.addEventListener("click", () => {
                     attack(move, 'opponent');
-                    const rand = Math.floor(Math.random() * 2);
+                    // opponent gets their turn after player attacks
+                    let rand = Math.floor(Math.random() * 2);
                     attack(bulbasaurMoves[rand], 'player');
                     returnToMenu();
                 });
@@ -203,6 +206,9 @@ function showItems() {
     potionBtn.addEventListener("click", () => {
         heal('player');
         timer();
+        // opponent gets their turn after player heals
+        let rand = Math.floor(Math.random() * 2);
+        attack(bulbasaurMoves[rand], 'player');
         returnToMenu();
     });
     li.appendChild(potionBtn);

@@ -1,12 +1,16 @@
 "use strict";
 
-//const express = require('express');
+const express = require('express');
 const cheerio = require('cheerio');
+const cors = require('cors');
 const fs = require('fs');
-//const app = express();
+const app = express();
 
-//app.use(express.urlencoded({ extended: true}));
-//app.use(express.json());
+app.use('/public', express.static('public'));
+app.use(cors());
+
+app.use(express.urlencoded({ extended: true}));
+app.use(express.json());
 
 async function getPokemonMoves() {
     try {
@@ -35,12 +39,50 @@ async function getPokemonMoves() {
 }
 
 getPokemonMoves();
+app.get('/hello', (req, res) => {
+    res.type('text').send("Hello World!");
+})
+app.get('/test/links', async (req, res) => {
+    console.log("to");
+    let links = [];
+    const response = await fetch('https://siena.edu/');
+    const body = await response.text();
+    const $ = cheerio.load(body);
+    const moves = [];
+    $('a[href]').map((i, el) => {
+        console.log($(el).attr('href'));
+        let link = $(el).attr('href').toString();
+        let goodLinks = []
+        let badLinks = []
+        fetch(link)
+        .then(statusCheck)
+        .then(addToList)
+        .catch(handleError);
+        links.push(link);
+    });
+    res.json(links);
+});
 
-// app.get('/hello', function (req, res) {
-//     res.type("text").send("Hello World");
-// });
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
 
-// const PORT = process.env.PORT || 3000;
-// app.listen(PORT, () => {
-//     console.log(`Server is running on port ${PORT}`);
-// });
+async function statusCheck(res) {
+    if (!res.ok) {
+        throw new Error(await res.text());
+    }
+    return res;
+}
+
+function addToList(link) {
+    if (link) {
+        
+    } else {
+
+    }
+}
+
+function handleError(error) {
+    console.log(error);
+}

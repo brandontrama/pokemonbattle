@@ -276,11 +276,13 @@ function timer() {
 function playerAtkAnim() {
     playerPokemon.classList.remove('moveBackward');
     playerPokemon.classList.add('moveForward');
+    opponentPokemon.classList.remove('unhit');
     opponentPokemon.classList.add('hit');
     setTimeout(() => {
         console.log("Attacking...");
         playerPokemon.classList.remove('moveForward');
         playerPokemon.classList.add('moveBackward');
+        opponentPokemon.classList.remove('hit');
         opponentPokemon.classList.add('unhit');
     }, 250);
 }

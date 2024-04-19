@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Links</title>
+</head>
+<body>
+    <div id="links">
+        <h1>Links</h1>
+    </div>
+
+    <script>
+        let BASE_URL = 'http://localhost:8000/test/links';
+
+        fetch(BASE_URL)
+        .then(statusCheck)
+        .then(resp => resp.json())
+        .then(appendList)
+        .catch(handleError);
+
+
+        async function statusCheck(res) {
+            if (!res.ok) {
+                throw new Error(await res.text());
+            }
+            return res;
+        }
+
+        function appendList(data) {
+            const links = document.getElementById('links');
+            data.forEach(item => {
+                let p = document.createElement('p');
+                p.appendChild(document.createTextNode(item));
+                links.appendChild(p);
+            });
+        }
+
+        function handleError(error) {
+            console.log(error);
+        }
+
+    </script>
+</body>
+</html>

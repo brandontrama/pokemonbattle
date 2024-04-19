@@ -43,20 +43,31 @@ const battleOptions = document.getElementById('battle-options');
 returnToMenu();
 
 // each move has a name, dmg, and pp (uses) value [name, dmg, pp]
-var bulbasaurMoves = [
-    ["TACKLE", 20, 20],
-    ["VINE WHIP", 35, 5]
-];
-var squirtleMoves = [
-    ["TACKLE", 25, 20],
-    ["WATER GUN", 30, 5]
-];
-var charmanderMoves = [
-    ["TACKLE", 20, 20],
-    ["EMBER", 30, 5]
-];
+var bulbasaurMoves = [];
+var charmanderMoves = [];
+var squirtleMoves = [];
 
-var moves = [bulbasaurMoves, charmanderMoves, squirtleMoves];
+// fetches the file created by the server and turns it into an array of moves
+const moves = fetch('./pokemonMoves.json')
+    .then((response) => response.json())
+    .then(data => {
+        const moves = data;
+        bulbasaurMoves = [
+            moves[829], // Tackle
+            moves[896]  // Vine Whip
+        ];
+        charmanderMoves = [
+            moves[829], // Tackle
+            moves[219]  // Ember
+        ];
+        squirtleMoves = [
+            moves[829], // Tackle
+            moves[902]  // Water Gun
+        ];
+        console.log(bulbasaurMoves);
+        console.log(charmanderMoves);
+        console.log(squirtleMoves);
+    });
 
 // replaces battle menu with fight menu
 function fight() {
@@ -65,11 +76,11 @@ function fight() {
     switch (player) {
         case 'BULBASAUR':
             bulbasaurMoves.forEach(move => {
-                console.log(move[0]);
+                console.log(move.name);
                 let li = document.createElement('li');
                 let moveButton = document.createElement('button');
-                moveButton.setAttribute('id', move[0]);
-                moveButton.appendChild(document.createTextNode(move[0]));
+                moveButton.setAttribute('id', move.name);
+                moveButton.appendChild(document.createTextNode(move.name));
                 moveButton.addEventListener("click", () => {
                     attack(move, 'opponent');
                     // opponent gets their turn after player attacks
@@ -83,11 +94,11 @@ function fight() {
             break;
         case 'CHARMANDER':
             charmanderMoves.forEach(move => {
-                console.log(move[0]);
+                console.log(move.name);
                 let li = document.createElement('li');
                 let moveButton = document.createElement('button');
-                moveButton.setAttribute('id', move[0]);
-                moveButton.appendChild(document.createTextNode(move[0]));
+                moveButton.setAttribute('id', move.name);
+                moveButton.appendChild(document.createTextNode(move.name));
                 moveButton.addEventListener("click", () => {
                     attack(move, 'opponent');
                     // opponent gets their turn after player attacks
@@ -101,11 +112,11 @@ function fight() {
                 break;
         case 'SQUIRTLE':
             squirtleMoves.forEach(move => {
-                console.log(move[0]);
+                console.log(move.name);
                 let li = document.createElement('li');
                 let moveButton = document.createElement('button');
-                moveButton.setAttribute('id', move[0]);
-                moveButton.appendChild(document.createTextNode(move[0]));
+                moveButton.setAttribute('id', move.name);
+                moveButton.appendChild(document.createTextNode(move.name));
                 moveButton.addEventListener("click", () => {
                     attack(move, 'opponent');
                     // opponent gets their turn after player attacks
@@ -130,13 +141,13 @@ const opponentHealthBar = document.getElementById('opponent-health');
 function attack(move, target) {
     switch (target) {
         case 'opponent':
-            opponentHealth -= move[1];
+            opponentHealth -= move.dmg;
             console.log("Opponent health: " + opponentHealth);
             opponentHealthBar.className = `progress-bar p${opponentHealth}`;
             playerAtkAnim();
             break;
         case 'player':
-            playerHealth -= move[1];
+            playerHealth -= move.dmg;
             console.log("Player health: " + playerHealth)
             playerHealthBar.className = `progress-bar p${playerHealth}`;
             break;

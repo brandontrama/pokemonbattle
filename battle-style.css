@@ -82,9 +82,9 @@
 }
 
 .hit {
-    color: white;
+    transform: rotate(45deg);
 }
 
 .unhit {
-    color: none;
+    transform: rotate(0deg);
 }

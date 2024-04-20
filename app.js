@@ -17,16 +17,17 @@ async function getPokemonMoves() {
         const response = await fetch('https://pokemondb.net/move/all');
         const body = await response.text();
         const $ = cheerio.load(body);
+        // creates the empty list of moves
         const moves = [];
         $('#moves > tbody > tr').map((i, el) => {
-            // grabs the move name from the table
+            // grabs the move name from the table in the website
             const name = $(el).find('.cell-name').text();
-            // grabs the damage value from the table
+            // grabs the damage value from the table in the website
             const dmg = $(el).find('.cell-num').eq(0).text().trim();
-            // grabs the pp value from the table
+            // grabs the pp value from the table in the website
             const pp = $(el).find('.cell-num').eq(2).text().trim();
 
-            // adds each move into the array
+            // adds each move into the list
             moves.push({name, dmg, pp});
         });
         fs.writeFile('pokemonMoves.json', JSON.stringify(moves), function(err) {
@@ -56,10 +57,16 @@ app.get('/test/links', async (req, res) => {
         let badLinks = []
         fetch(link)
         .then(statusCheck)
+        .then(resp => resp.json())
         .then(addToList)
         .catch(handleError);
-        links.push(link);
+        if (link.toString().includes('http')) {
+            links.push(link);
+        }
+        console.log(goodLinks);
+        console.log(badLinks);
     });
+    console.log(links);
     res.json(links);
 });
 
@@ -68,19 +75,17 @@ app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
 
-async function statusCheck(res) {
-    if (!res.ok) {
-        throw new Error(await res.text());
+async function statusCheck(resp) {
+    if (!resp.ok) {
+        badLinks.push(resp);
+        throw new Error(await resp.text());
     }
-    return res;
+    return resp;
 }
 
-function addToList(link) {
-    if (link) {
-        
-    } else {
-
-    }
+function addToList(resp) {
+    console.log(resp);
+    goodLinks.push(resp);
 }
 
 function handleError(error) {

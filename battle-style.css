@@ -1,22 +1,13 @@
-/*body {
+body {
     margin: 0;
     padding: 0;
-    background-image: url('backgrounds/gbaoverlay_with_battlebackground.png');
+    background-image: url('backgrounds/battle-background.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     height: 100vh;
     z-index: -999;
-}*/
-
-/*.battle-background img {
-    position: absolute;
-    height: 545px;
-    width: 815px;
-    top: 119px;
-    left: 241px;
-    z-index: -999;
-}*/
+}
 
 #players-pokemon, #opponents-pokemon {
     position: absolute;
@@ -31,11 +22,16 @@
     justify-content: space-around;
     height: 500px;
     width: 500px;
-    padding-bottom: 9.5vh;
+    padding-bottom: 20vh;
 }
 
 .health {
     width: 400px;
+    background: white;
+    border-radius: 8px;
+    padding: 5px;
+
+    
 }
 
 .battling-pokemon {
@@ -46,7 +42,7 @@
 #battle-options {
     background-color: white;
     height: 200px;
-    width: 575px;
+    width: 750px;
     left: 40vw;
     bottom: 55vh;
 }
@@ -55,6 +51,7 @@
     height: 400px;
     width: auto;
     z-index: -998;
+    bottom: -63px;
 }
 
 .opponent-box {

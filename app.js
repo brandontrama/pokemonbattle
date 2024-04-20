@@ -14,11 +14,15 @@ app.use(express.json());
 
 async function getPokemonMoves() {
     try {
+        // makes request to fetch data from the move database
         const response = await fetch('https://pokemondb.net/move/all');
+        // extracts HTML content of the response
         const body = await response.text();
+        // loads HTML content into Cheerio
         const $ = cheerio.load(body);
         // creates the empty list of moves
         const moves = [];
+        // iterates over each table row containing move data
         $('#moves > tbody > tr').map((i, el) => {
             // grabs the move name from the table in the website
             const name = $(el).find('.cell-name').text();

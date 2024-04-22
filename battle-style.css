@@ -29,14 +29,12 @@ body {
     width: 400px;
     background: white;
     border-radius: 8px;
-    padding: 5px;
-
-    
+    padding: 10px;
 }
 
 .battling-pokemon {
-    height: 400px;
-    width: 400px;
+    height: 300px;
+    width: 300px;
 }
 
 #battle-options {
@@ -48,10 +46,10 @@ body {
 }
 
 #players-pokemon {
-    height: 400px;
+    height: 500px;
     width: auto;
     z-index: -998;
-    bottom: -63px;
+    bottom: -10.25vh;
 }
 
 .opponent-box {

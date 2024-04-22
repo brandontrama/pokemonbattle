@@ -6,7 +6,7 @@ music.play();
 
 // grabs the query param that specifies the player's pokemon
 var searchParams = new URLSearchParams(window.location.search);
-var player = searchParams.get('pokemon').toUpperCase();
+var player = searchParams.get('monster').toUpperCase();
 
 let opponent;
 
@@ -15,9 +15,9 @@ chooseOpponent(player);
 
 // displays both player and opponent's pokemon
 const playerPokemon = document.getElementById('players-pokemon');
-playerPokemon.setAttribute('src', `sprites/GenI/back_sprites/${player}_backsprite.png`);
+playerPokemon.setAttribute('src', `sprites/GenI/back_sprites/${player}_back.png`);
 const opponentPokemon = document.getElementById('opponents-pokemon');
-opponentPokemon.setAttribute('src', `sprites/GenI/front_sprites/anim/${opponent}_frontsprite[ANIM].png`);
+opponentPokemon.setAttribute('src', `sprites/GenI/front_sprites/reg/${opponent}.png`);
 
 const playerHealthLabel = document.getElementById('player-health-label');
 playerHealthLabel.appendChild(document.createTextNode(`${player}` + `:`));
@@ -27,14 +27,14 @@ opponentHealthLabel.appendChild(document.createTextNode(`${opponent}` + `:`));
 // assigns the correct opponent based on the player based on type-opposites
 function chooseOpponent(player) {
     switch (player) {
-        case 'BULBASAUR':
-            opponent = 'CHARMANDER';
+        case 'PETALPUFF':
+            opponent = 'FLAMETAIL';
             break;
-        case 'CHARMANDER':
-            opponent = 'SQUIRTLE';
+        case 'FLAMETAIL':
+            opponent = 'SPLASHSHELL';
             break;
-        case 'SQUIRTLE':
-            opponent = 'BULBASAUR';
+        case 'SPLASHSHELL':
+            opponent = 'PETALPUFF';
             break;
     }
 }
@@ -74,7 +74,7 @@ function fight() {
     let moveList = document.createElement('ul');
     moveList.className = 'framed buttons compact';
     switch (player) {
-        case 'BULBASAUR':
+        case 'PETALPUFF':
             bulbasaurMoves.forEach(move => {
                 console.log(move.name);
                 let li = document.createElement('li');
@@ -92,7 +92,7 @@ function fight() {
                 moveList.appendChild(li);
             });
             break;
-        case 'CHARMANDER':
+        case 'FLAMETAIL':
             charmanderMoves.forEach(move => {
                 console.log(move.name);
                 let li = document.createElement('li');
@@ -110,7 +110,7 @@ function fight() {
                 moveList.appendChild(li);
             });
                 break;
-        case 'SQUIRTLE':
+        case 'SPLASHSHELL':
             squirtleMoves.forEach(move => {
                 console.log(move.name);
                 let li = document.createElement('li');
@@ -161,12 +161,12 @@ function attack(move, target) {
         timer();
         window.location.href = "index.html";
     } else if (opponentHealth <= 0) {
-        console.log("Opponent's pokemon fainted. You won!");
+        console.log("Opponent's monster fainted. You won!");
         // let victoryMsg = document.createElement('h3');
         // victoryMsg.appendChild(document.createTextNode("Opponent's pokemon fainted. You won!"));
         // battleOptions.replaceChildren(victoryMsg);
         timer();
-        alert("Opponent's pokemon fainted. You won!")
+        alert("Opponent's monster fainted. You won!")
         window.location.href = "index.html";
     }
 }
@@ -244,8 +244,8 @@ function returnToMenu() {
 
     let pkmn = document.createElement('li');
     let pkmnBtn = document.createElement('button');
-    pkmnBtn.className = 'pokemon';
-    pkmnBtn.appendChild(document.createTextNode('PKMN'));
+    //pkmnBtn.className = 'pokemon';
+    pkmnBtn.appendChild(document.createTextNode('Monsters'));
     pkmn.appendChild(pkmnBtn);
 
     let item = document.createElement('li');

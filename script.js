@@ -30,19 +30,20 @@ let selectedPokemon = null;
 
 function selectPokemon(event) {
     const pokemonId = event.target.id;
+    console.log(pokemonId);
     selectedPokemon = pokemonId;
     document.getElementById('confirmation-box').style.display = 'block';
     const pokemonImage = document.getElementById(selectedPokemon);
-    pokemonImage.src = `sprites/GenI/front_sprites/anim/${selectedPokemon}_frontsprite[ANIM].png`;
+    //pokemonImage.src = `sprites/GenI/front_sprites/anim/${selectedPokemon}_frontsprite[ANIM].png`;
     pokemonImage.classList.add('big');
     switch (selectedPokemon) {
-        case 'bulbasaur':
+        case 'PETALPUFF':
             bulbasaurCry.play();
             break;
-        case 'charmander':
+        case 'FLAMETAIL':
             charmanderCry.play();
             break;
-        case 'squirtle':
+        case 'SPLASHSHELL':
             squirtleCry.play();
             break;
         default:
@@ -53,11 +54,11 @@ function selectPokemon(event) {
 function confirmSelection(confirm) {
     if (confirm) {
         console.log("Selected Pokemon:", selectedPokemon);
-        window.location.href = 'battle.html?pokemon=' + encodeURIComponent(selectedPokemon);
+        window.location.href = 'battle.html?monster=' + encodeURIComponent(selectedPokemon);
     } else {    
         document.getElementById('confirmation-box').style.display = 'none';
         const pokemonImage = document.getElementById(selectedPokemon);
-        pokemonImage.src = `sprites/GenI/front_sprites/reg/${selectedPokemon}_frontsprite.png`;
+        //pokemonImage.src = `sprites/GenI/front_sprites/reg/${selectedPokemon}_frontsprite.png`;
         pokemonImage.classList.remove('big');
     }
     selectedPokemon = null;

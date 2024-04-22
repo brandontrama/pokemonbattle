@@ -9,7 +9,7 @@ const app = express();
 app.use('/public', express.static('public'));
 app.use(cors());
 
-app.use(express.urlencoded({ extended: true}));
+app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 async function getPokemonMoves() {
@@ -46,32 +46,59 @@ async function getPokemonMoves() {
 getPokemonMoves();
 app.get('/hello', (req, res) => {
     res.type('text').send("Hello World!");
-})
+});
+
+async function checkLinks(links){
+    let goodLinks = [];
+    let badLinks = [];
+
+    async function checkLink(link) {
+        try {
+            const response = await fetch(link);
+            if (response.ok) {
+                goodLinks.push(link);
+            } else {
+                badLinks.push(link);
+            }
+        } catch (error) {
+            console.error(error);
+            badLinks.push(link);
+        }
+    }
+
+    for (const link of links) {
+        await checkLink(link);
+    }
+
+    return {goodLinks, badLinks};
+}
+
+// Example usage:
+const links = ["https://example.com", "https://nonexistenturl123.com"];
+
 app.get('/test/links', async (req, res) => {
-    console.log("to");
     let links = [];
-    const response = await fetch('https://siena.edu/');
+    let initialLink = req.params['initialLink'];
+    const response = await fetch(initialLink);
     const body = await response.text();
     const $ = cheerio.load(body);
-    const moves = [];
+    // looping through all anchor tags with an 'href' attribute
     $('a[href]').map((i, el) => {
         console.log($(el).attr('href'));
+        // extracting the href attribute value and converting it to a string
         let link = $(el).attr('href').toString();
-        let goodLinks = []
-        let badLinks = []
-        fetch(link)
-        .then(statusCheck)
-        .then(resp => resp.json())
-        .then(addToList)
-        .catch(handleError);
+        // checking if the link includes 'http' (filtering out non-HTTP links)
         if (link.toString().includes('http')) {
+            // Adding the HTTP link to the 'links' array
             links.push(link);
         }
-        console.log(goodLinks);
-        console.log(badLinks);
     });
     console.log(links);
-    res.json(links);
+    // calling the 'checkLinks' function to classify the links into
+    // good and bad links
+    let classified_links = await checkLinks(links);
+    res.json({'all' : links, 'good' : classified_links.goodLinks,
+              'bad' : classified_links.badLinks});
 });
 
 const PORT = process.env.PORT || 8000;
@@ -82,14 +109,9 @@ app.listen(PORT, () => {
 async function statusCheck(resp) {
     if (!resp.ok) {
         badLinks.push(resp);
-        throw new Error(await resp.text());
+    } else {
+        goodLinks.push(resp);
     }
-    return resp;
-}
-
-function addToList(resp) {
-    console.log(resp);
-    goodLinks.push(resp);
 }
 
 function handleError(error) {

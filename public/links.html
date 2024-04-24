@@ -53,44 +53,29 @@
     <script>
         const linkForm = document.getElementById('linkForm').addEventListener('submit', async function (event) {
             event.preventDefault();
-
             const initialLink = document.getElementById('initialLink').value;
-            
-            try {
-                const resp = await fetch('http://localhost:8000/test/links/add', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'text/plain',
-                    },
-                    body: initialLink
-                });
-
-                if (!resp.ok) {
-                    throw new Error('Failed to add link. Try another link.');
-                }
-
-                const result = await resp.json();
-                console.log('All Links:', result.all);
-                console.log('Good Links:', result.good);
-                console.log('Bad Links:', result.bad);
-            } catch (error) {
-                console.log(error);
-            }
+            fetch('http://localhost:8000/test/links/add', {method: 'POST', body: initialLink})
+                .then(statusCheck)
+                .then(resp => resp.json())
+                .then(async () => {
+                    const result = await resp.json();
+                    console.log('All Links:', result.all);
+                    console.log('Good Links:', result.good);
+                    console.log('Bad Links:', result.bad);
+                })
+                .catch(handleError);
         });
 
+        async function statusCheck(res) {
+            if (!res.ok) {
+                throw new Error(await res.text());
+            }
+            return res;
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
+        function handleError(error) {
+            console.log(error);
+        }
 
         // let BASE_URL = 'http://localhost:8000/test/links';
 
@@ -100,14 +85,6 @@
         // .then(appendList)
         // .catch(handleError);
 
-
-        // async function statusCheck(res) {
-        //     if (!res.ok) {
-        //         throw new Error(await res.text());
-        //     }
-        //     return res;
-        // }
-
         // function appendList(data) {
         //     const links = document.getElementById('links');
         //     data.forEach(item => {
@@ -115,10 +92,6 @@
         //         p.appendChild(document.createTextNode(item));
         //         links.appendChild(p);
         //     });
-        // }
-
-        // function handleError(error) {
-        //     console.log(error);
         // }
     </script>
 </body>

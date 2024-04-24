@@ -101,6 +101,32 @@ app.get('/test/links', async (req, res) => {
               'bad' : classified_links.badLinks});
 });
 
+app.post('/test/links/add', async (req, res) => {
+    const initialLink = req.body.initialLink;
+    const response = await fetch(initialLink);
+    const body = await response.text();
+    const $ = cheerio.load(body);
+    let links = [];
+    // looping through all anchor tags with an 'href' attribute
+    $('a[href]').map((i, el) => {
+        console.log($(el).attr('href'));
+        // extracting the href attribute value and converting it to a string
+        let link = $(el).attr('href').toString();
+        // checking if the link includes 'http' (filtering out non-HTTP links)
+        if (link.toString().includes('http')) {
+            // Adding the HTTP link to the 'links' array
+            links.push(link);
+        }
+    });
+    console.log(links);
+    // calling the 'checkLinks' function to classify the links into
+    // good and bad links
+    let classified_links = await checkLinks(links);
+    res.json({'all' : links, 'good' : classified_links.goodLinks,
+              'bad' : classified_links.badLinks});
+
+});
+
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

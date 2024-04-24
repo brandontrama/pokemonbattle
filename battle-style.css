@@ -73,13 +73,24 @@ body {
 }
 
 .moveBackward {
+    transform: translate(-50px, -100px);
+}
+
+.moveBack {
     transform: translate(0);
 }
 
-.hit {
+.playerHit {
+    transform: rotate(-45deg);
+    filter: grayscale(100%);
+}
+
+.opponentHit {
     transform: rotate(45deg);
+    filter: grayscale(100%);
 }
 
 .unhit {
     transform: rotate(0deg);
+    filter: none;
 }

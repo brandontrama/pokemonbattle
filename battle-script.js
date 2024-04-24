@@ -83,10 +83,12 @@ function fight() {
                 moveButton.appendChild(document.createTextNode(move.name));
                 moveButton.addEventListener("click", () => {
                     attack(move, 'opponent');
-                    // opponent gets their turn after player attacks
-                    let rand = Math.floor(Math.random() * 2);
-                    attack(charmanderMoves[rand], 'player');
-                    returnToMenu();
+                    setTimeout(() => {
+                        // opponent gets their turn 3 seconds after player attacks
+                        let rand = Math.floor(Math.random() * 2);
+                        attack(bulbasaurMoves[rand], 'player');
+                        returnToMenu();
+                    }, 2000);
                 });
                 li.appendChild(moveButton);
                 moveList.appendChild(li);
@@ -101,10 +103,12 @@ function fight() {
                 moveButton.appendChild(document.createTextNode(move.name));
                 moveButton.addEventListener("click", () => {
                     attack(move, 'opponent');
-                    // opponent gets their turn after player attacks
-                    let rand = Math.floor(Math.random() * 2);
-                    attack(squirtleMoves[rand], 'player');
-                    returnToMenu();
+                    setTimeout(() => {
+                        // opponent gets their turn 3 seconds after player attacks
+                        let rand = Math.floor(Math.random() * 2);
+                        attack(bulbasaurMoves[rand], 'player');
+                        returnToMenu();
+                    }, 2000);
                 });
                 li.appendChild(moveButton);
                 moveList.appendChild(li);
@@ -119,10 +123,12 @@ function fight() {
                 moveButton.appendChild(document.createTextNode(move.name));
                 moveButton.addEventListener("click", () => {
                     attack(move, 'opponent');
-                    // opponent gets their turn after player attacks
-                    let rand = Math.floor(Math.random() * 2);
-                    attack(bulbasaurMoves[rand], 'player');
-                    returnToMenu();
+                    setTimeout(() => {
+                        // opponent gets their turn 3 seconds after player attacks
+                        let rand = Math.floor(Math.random() * 2);
+                        attack(bulbasaurMoves[rand], 'player');
+                        returnToMenu();
+                    }, 2000);
                 });
                 li.appendChild(moveButton);
                 moveList.appendChild(li);
@@ -141,15 +147,18 @@ const opponentHealthBar = document.getElementById('opponent-health');
 function attack(move, target) {
     switch (target) {
         case 'opponent':
+            console.log(target);
             opponentHealth -= move.dmg;
             console.log("Opponent health: " + opponentHealth);
             opponentHealthBar.className = `progress-bar p${opponentHealth}`;
             playerAtkAnim();
             break;
         case 'player':
+            console.log(target);
             playerHealth -= move.dmg;
             console.log("Player health: " + playerHealth)
             playerHealthBar.className = `progress-bar p${playerHealth}`;
+            opponentAtkAnim();
             break;
     }
     if (playerHealth <= 0) {
@@ -274,15 +283,29 @@ function timer() {
 }
 
 function playerAtkAnim() {
-    playerPokemon.classList.remove('moveBackward');
+    playerPokemon.classList.remove('moveBack');
     playerPokemon.classList.add('moveForward');
     opponentPokemon.classList.remove('unhit');
-    opponentPokemon.classList.add('hit');
+    opponentPokemon.classList.add('opponentHit');
     setTimeout(() => {
-        console.log("Attacking...");
+        console.log("Player Attacking...");
         playerPokemon.classList.remove('moveForward');
-        playerPokemon.classList.add('moveBackward');
-        opponentPokemon.classList.remove('hit');
+        playerPokemon.classList.add('moveBack');
+        opponentPokemon.classList.remove('opponentHit');
         opponentPokemon.classList.add('unhit');
+    }, 250);
+}
+
+function opponentAtkAnim() {
+    opponentPokemon.classList.remove('moveBack');
+    opponentPokemon.classList.add('moveBackward');
+    playerPokemon.classList.remove('unhit');
+    playerPokemon.classList.add('playerHit');
+    setTimeout(() => {
+        console.log("Opponent Attacking...");
+        opponentPokemon.classList.remove('moveBackward');
+        opponentPokemon.classList.add('moveBack');
+        playerPokemon.classList.remove('playerHit');
+        playerPokemon.classList.add('unhit');
     }, 250);
 }

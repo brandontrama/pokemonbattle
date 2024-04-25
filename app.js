@@ -58,7 +58,8 @@ async function checkLinks(links){
             if (response.ok) {
                 goodLinks.push(link);
             } else {
-                badLinks.push(link);
+                const errorStatus = response.status;
+                badLinks.push(`Error ${errorStatus}: ${link}`);
             }
         } catch (error) {
             console.error(error);

@@ -80,7 +80,7 @@ app.get('/test/links', async (req, res) => {
     let links = [];
     let initialLink = req.params['initialLink'];
     const response = await fetch(initialLink);
-    const body = await response.text();
+    const body = await response.json();
     const $ = cheerio.load(body);
     // looping through all anchor tags with an 'href' attribute
     $('a[href]').map((i, el) => {
@@ -103,6 +103,7 @@ app.get('/test/links', async (req, res) => {
 
 app.post('/test/links/add', async (req, res) => {
     const initialLink = req.body.initialLink;
+    console.log(initialLink);
     const response = await fetch(initialLink);
     const body = await response.text();
     const $ = cheerio.load(body);

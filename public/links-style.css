@@ -1,0 +1,30 @@
+body {
+    padding: 20px;
+    background-image: url('images/gradient-background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.btn {margin-top: 10px;}
+.form-control {flex: 0 1 100px;}
+#linksContainer {
+    display: none;
+    margin-top: 450px;
+}
+#gradientHeader {
+    --bg-size: 400%;
+    background: linear-gradient(60deg, #1d2b64, #f8cdda, #1d2b64) 0 0 / 400% 100%;
+    color: transparent;
+    background-clip: text;
+    animation: gradient 10s infinite linear;
+    }
+.gradientButton {
+    --bg-size: 400%;
+    background: linear-gradient(60deg, #1d2b64, #f8cdda, #1d2b64) 0 0 / 400% 100%;
+    animation: gradient 20s infinite linear;
+    border: none;
+}
+@keyframes gradient {
+    to {
+        background-position: var(--bg-size) 0;
+    }
+}

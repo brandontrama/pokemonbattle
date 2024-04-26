@@ -1,7 +1,8 @@
 
 // plays the background wild battle music
 var music = new Audio('audios/music/pokemon_red_wildbattlemusic.mp3');
-music.volume = 0.5;
+// * MUTED DUE TO COPYRIGHT *
+music.volume = 0;
 music.play();
 
 // grabs the query param that specifies the player's pokemon

@@ -43,30 +43,33 @@ const battleOptions = document.getElementById('battle-options');
 returnToMenu();
 
 // each move has a name, dmg, and pp (uses) value [name, dmg, pp]
-var bulbasaurMoves = [];
-var charmanderMoves = [];
-var squirtleMoves = [];
+var PETALPUFF_MOVES = [];
+var FLAMETAIL_MOVES = [];
+var SPLASHSHELL_MOVES = [];
 
 // fetches the file created by the server and turns it into an array of moves
 const moves = fetch('./pokemonMoves.json')
     .then((response) => response.json())
     .then(data => {
         const moves = data;
-        bulbasaurMoves = [
+        PETALPUFF_MOVES = [
             moves[829], // Tackle
-            moves[896]  // Vine Whip
+            moves[896], // Vine Whip
+            moves[646]  // Razor Leaf
         ];
-        charmanderMoves = [
+        FLAMETAIL_MOVES = [
             moves[829], // Tackle
+            moves[694], // Scratch
             moves[219]  // Ember
         ];
-        squirtleMoves = [
+        SPLASHSHELL_MOVES = [
             moves[829], // Tackle
+            moves[60],  // Bite
             moves[902]  // Water Gun
         ];
-        console.log(bulbasaurMoves);
-        console.log(charmanderMoves);
-        console.log(squirtleMoves);
+        console.log(PETALPUFF_MOVES);
+        console.log(FLAMETAIL_MOVES);
+        console.log(SPLASHSHELL_MOVES);
     });
 
 // replaces battle menu with fight menu
@@ -75,7 +78,7 @@ function fight() {
     moveList.className = 'framed buttons compact';
     switch (player) {
         case 'PETALPUFF':
-            bulbasaurMoves.forEach(move => {
+            PETALPUFF_MOVES.forEach(move => {
                 console.log(move.name);
                 let li = document.createElement('li');
                 let moveButton = document.createElement('button');
@@ -86,7 +89,7 @@ function fight() {
                     setTimeout(() => {
                         // opponent gets their turn 3 seconds after player attacks
                         let rand = Math.floor(Math.random() * 2);
-                        attack(bulbasaurMoves[rand], 'player');
+                        attack(FLAMETAIL_MOVES[rand], 'player');
                         returnToMenu();
                     }, 2000);
                 });
@@ -95,7 +98,7 @@ function fight() {
             });
             break;
         case 'FLAMETAIL':
-            charmanderMoves.forEach(move => {
+            FLAMETAIL_MOVES.forEach(move => {
                 console.log(move.name);
                 let li = document.createElement('li');
                 let moveButton = document.createElement('button');
@@ -106,7 +109,7 @@ function fight() {
                     setTimeout(() => {
                         // opponent gets their turn 3 seconds after player attacks
                         let rand = Math.floor(Math.random() * 2);
-                        attack(bulbasaurMoves[rand], 'player');
+                        attack(SPLASHSHELL_MOVES[rand], 'player');
                         returnToMenu();
                     }, 2000);
                 });
@@ -115,7 +118,7 @@ function fight() {
             });
                 break;
         case 'SPLASHSHELL':
-            squirtleMoves.forEach(move => {
+            SPLASHSHELL_MOVES.forEach(move => {
                 console.log(move.name);
                 let li = document.createElement('li');
                 let moveButton = document.createElement('button');
@@ -123,10 +126,11 @@ function fight() {
                 moveButton.appendChild(document.createTextNode(move.name));
                 moveButton.addEventListener("click", () => {
                     attack(move, 'opponent');
+
                     setTimeout(() => {
                         // opponent gets their turn 3 seconds after player attacks
                         let rand = Math.floor(Math.random() * 2);
-                        attack(bulbasaurMoves[rand], 'player');
+                        attack(FLAMETAIL_MOVES[rand], 'player');
                         returnToMenu();
                     }, 2000);
                 });
@@ -152,6 +156,10 @@ function attack(move, target) {
             console.log("Opponent health: " + opponentHealth);
             opponentHealthBar.className = `progress-bar p${opponentHealth}`;
             playerAtkAnim();
+            let playerAtkMsg = document.createElement('h3');
+            playerAtkMsg.appendChild(document.createTextNode(`${player} used ${move.name}!`));
+            console.log(playerAtkMsg.textContent);
+            battleOptions.replaceChildren(playerAtkMsg);
             break;
         case 'player':
             console.log(target);
@@ -159,6 +167,10 @@ function attack(move, target) {
             console.log("Player health: " + playerHealth)
             playerHealthBar.className = `progress-bar p${playerHealth}`;
             opponentAtkAnim();
+            let oppAtkMsg = document.createElement('h3');
+            oppAtkMsg.appendChild(document.createTextNode(`${opponent} used ${move.name}!`));
+            console.log(oppAtkMsg.textContent);
+            battleOptions.replaceChildren(oppAtkMsg);
             break;
     }
     if (playerHealth <= 0) {
@@ -184,21 +196,24 @@ function attack(move, target) {
 function heal(target) {
     switch (target) {
         case 'opponent':
-            if (opponentHealth === 100) {
-                let didntWork = document.createElement('h3'); // creates a new header element
-                didntWork.appendChild(document.createTextNode("It didn't work...")); // adds a new text node into the header
+            if (opponentHealth === 0) {
+                let didntWork = document.createElement('h3');
+                didntWork.appendChild(document.createTextNode("It didn't work..."));
                 console.log(didntWork.textContent);
-                battleOptions.replaceChildren(didntWork); // replaces all children in battleOptions with the new header created above
-                break;
+                battleOptions.replaceChildren(didntWork);
             } else if (opponentHealth > 80) {
                 opponentHealth = 100;
                 console.log("Opponent health: " + opponentHealth);
                 opponentHealthBar.className = `progress-bar p${opponentHealth}`;
-                break;
-            } else
-            opponentHealth += 20;
-            console.log("Opponent health: " + opponentHealth);
-            opponentHealthBar.className = `progress-bar p${opponentHealth}`;
+            } else {
+                opponentHealth += 40;
+                console.log("Opponent health: " + opponentHealth);
+                opponentHealthBar.className = `progress-bar p${opponentHealth}`;
+                let oppHeal = document.createElement('h3');
+                oppHeal.appendChild(document.createTextNode(`${opponent} used Potion!`));
+                console.log(oppHeal.textContent);
+                battleOptions.replaceChildren(oppHeal);
+            }
             break;
         case 'player':
             if (playerHealth === 100) {
@@ -206,13 +221,18 @@ function heal(target) {
                 battlePrompt.appendChild(document.createTextNode('It didn\'t work...'));
                 battleOptions.replaceChildren(battlePrompt);
             } else if (playerHealth > 80) {
-                playerHealth += 100 - (playerHealth - 20);
-                console.log("Opponent health: " + playerHealth);
-                playerHealthBar.className = `progress-bar p${playerHealthBar}`;
-            } else
-            playerHealth += 20;
-            console.log("Player health: " + playerHealth)
-            playerHealthBar.className = `progress-bar p${playerHealth}`;
+                playerHealth = 100;
+                console.log("Player health: " + playerHealth);
+                playerHealthBar.className = `progress-bar p${playerHealth}`;
+            } else {
+                playerHealth += 40;
+                console.log("Player health: " + playerHealth)
+                playerHealthBar.className = `progress-bar p${playerHealth}`;
+                let playerHeal = document.createElement('h3');
+                playerHeal.appendChild(document.createTextNode(`${player} used Potion!`));
+                console.log(playerHeal.textContent);
+                battleOptions.replaceChildren(playerHeal);
+            }
             break;
     }
 }
@@ -227,10 +247,22 @@ function showItems() {
     potionBtn.addEventListener("click", () => {
         heal('player');
         timer();
-        // opponent gets their turn after player heals
-        let rand = Math.floor(Math.random() * 2);
-        attack(bulbasaurMoves[rand], 'player');
-        returnToMenu();
+        setTimeout(() => {
+            // opponent gets their turn 3 seconds after player heals
+            let rand = Math.floor(Math.random() * 2);
+            switch (opponent) {
+                case 'PETALPUFF':
+                    attack(PETALPUFF_MOVES[rand], 'player');
+                    break;
+                case 'FLAMETAIL':
+                    attack(FLAMETAIL_MOVES[rand], 'player');
+                    break;
+                case 'SPLASHSHELL':
+                    attack(SPLASHSHELL_MOVES[rand], 'player');
+                    break;
+            }
+            returnToMenu();
+        }, 2000);
     });
     li.appendChild(potionBtn);
     ul.appendChild(li);

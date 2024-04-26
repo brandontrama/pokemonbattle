@@ -104,14 +104,14 @@ app.get('/test/links', async (req, res) => {
 
 app.post('/test/links/add', async (req, res) => {
     const initialLink = req.body.initialLink;
-    console.log(initialLink);
+    console.log("Initial link: " + initialLink);
     const response = await fetch(initialLink);
     const body = await response.text();
     const $ = cheerio.load(body);
     let links = [];
     // looping through all anchor tags with an 'href' attribute
     $('a[href]').map((i, el) => {
-        console.log($(el).attr('href'));
+        //console.log($(el).attr('href'));
         // extracting the href attribute value and converting it to a string
         let link = $(el).attr('href').toString();
         // checking if the link includes 'http' (filtering out non-HTTP links)

@@ -15,9 +15,9 @@ chooseOpponent(player);
 
 // displays both player and opponent's pokemon
 const playerPokemon = document.getElementById('players-pokemon');
-playerPokemon.setAttribute('src', `sprites/GenI/back_sprites/${player}_back.png`);
+playerPokemon.setAttribute('src', `sprites/back_sprites/${player}_back.png`);
 const opponentPokemon = document.getElementById('opponents-pokemon');
-opponentPokemon.setAttribute('src', `sprites/GenI/front_sprites/reg/${opponent}.png`);
+opponentPokemon.setAttribute('src', `sprites/front_sprites/reg/${opponent}.png`);
 
 const playerHealthLabel = document.getElementById('player-health-label');
 playerHealthLabel.appendChild(document.createTextNode(`${player}` + `:`));
@@ -299,6 +299,7 @@ function returnToMenu() {
     let runBtn = document.createElement('button');
     runBtn.appendChild(document.createTextNode('Run'));
     runBtn.addEventListener("click", () => {
+        alert("You got away safely!");
         window.location.href = 'index.html';
     });
     run.appendChild(runBtn);

@@ -1,2 +1,2 @@
 # pokemonbattle
-A simple pokemon battle game (in-progress)
+A simple pokemon-inspired battle game (in-progress)
